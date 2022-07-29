@@ -47,16 +47,12 @@ input {
     font-size: inherit;
 }
 
-input:hover {
-    border-radius: 5px;
-}
-
 .keys {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 4px 4px;
 
-    margin: 0 12px 12px;
+    /* margin: 0 12px 12px; */
 }
 
 .key {
