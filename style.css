@@ -1,3 +1,11 @@
+:root {
+    --calc-color: #eee;
+    --clear-color: hsl(0, 80%, 70%);
+    --operator-color: hsl(180, 80%, 70%);
+    --answer-color: hsl(90, 80%, 70%);
+}
+
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,5 +13,104 @@
 }
 
 body {
-    font-family: monospace;
+    font-family: 'Digital-7', 'Share Tech Mono', monospace;
+    font-size: 36px;
+    background-color: #000;
+    color: var(--calc-color);
+
+    height: 100vh;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.calculator {
+    display: grid;
+    min-width: 30%;
+
+    transition: all .15s;
+}
+
+.calculator:hover {
+    /* border: .4px solid var(--calc-color); */
+    /* box-shadow: 0 0 5px 2px var(--calc-color); */
+}
+
+input {
+    margin-bottom: 12px;
+    border: 1px solid var(--calc-color);
+    background-color: inherit;
+    color: inherit;
+    caret-color: var(--calc-color);
+    height: 85px;
+    font-size: inherit;
+}
+
+input:hover {
+    border-radius: 5px;
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 4px 4px;
+
+    margin: 0 12px 12px;
+}
+
+.key {
+    display: inline-block;
+    height: 85px;
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    cursor: pointer;
+    transition: all .1s;
+}
+
+.key:hover {
+    border-radius: 5px;
+    border: 1px solid var(--calc-color);
+    box-shadow: 0 1px 2px 0 var(--calc-color),
+                0 2px 6px 2px var(--calc-color);
+    transform: translateY(-1px);
+}
+
+.clear {
+    color: var(--clear-color);
+}
+
+.clear:hover {
+    box-shadow: 0 1px 2px 0 var(--clear-color),
+                0 2px 6px 2px var(--clear-color);
+    border-color: var(--clear-color);
+}
+
+.operator {
+    color: var(--operator-color);
+}
+
+.operator:hover {
+    box-shadow: 0 1px 2px 0 var(--operator-color),
+                0 2px 6px 2px var(--operator-color);
+    border-color: var(--operator-color);
+}
+
+.answer {
+    color: var(--answer-color);
+}
+
+.answer:hover {
+    box-shadow: 0 1px 2px 0 var(--answer-color),
+                0 2px 6px 2px var(--answer-color);
+    border-color: var(--answer-color);
+}
+
+.key:active {
+    box-shadow: none;
+    transform: initial;
 }
