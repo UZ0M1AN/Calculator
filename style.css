@@ -39,12 +39,14 @@ body {
 
 input {
     margin-bottom: 12px;
+    padding: 2px 8px;
     border: 1px solid var(--calc-color);
     background-color: inherit;
     color: inherit;
     caret-color: var(--calc-color);
     height: 85px;
     font-size: inherit;
+    letter-spacing: 8px;
 }
 
 .keys {
@@ -98,6 +100,7 @@ input {
 
 .answer {
     color: var(--answer-color);
+    font-size: 56px;
 }
 
 .answer:hover {
