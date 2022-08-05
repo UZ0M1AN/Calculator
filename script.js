@@ -25,21 +25,21 @@ function displayContent(e) {
     const number = e.target.classList.length ? e.target.querySelector('span') : e.target;
 
     if (/[ca=]/i.test(number.textContent)) return;
-    calcDisplay += number.textContent;
-    display.value = calcDisplay;
+    calculation += number.textContent;
+    display.value = calculation;
 }
 
 function displayResult() {
-    const formula = showFormula(calcDisplay);
-    display.value = calcDisplay = operate(formula.operator, +formula.num[0], +formula.num[1]);
+    const formula = showFormula(calculation);
+    display.value = calculation = operate(formula.operator, +formula.num[0], +formula.num[1]);
 }
 
 function clearOneChar() {
-    display.value = calcDisplay = String(calcDisplay).slice(0, -1);
+    display.value = calculation = String(calculation).slice(0, -1);
 }
 
 function clearDisplay() {
-    display.value = calcDisplay = '';
+    display.value = calculation = '';
 }
 
 ///////////////////// Helpers ////////////////////////////////////////////
@@ -64,7 +64,7 @@ const clearOne = document.querySelector('.clear-one-char');
 const clearAll = document.querySelector('.clear-all');
 
 // Other
-let calcDisplay = '';
+let calculation = '';
 
 // Event Listeners
 keys.addEventListener('click', displayContent);
