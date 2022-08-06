@@ -47,7 +47,7 @@ function displayKeyboardContent(e) {
             return;
     }
 
-    if (/[^0-9.+/*-x]/i.test(e.key) || calculation.length >= DISPLAY_MAXLENGTH) return;
+    if (/[^0-9.+/*x-]/i.test(e.key) || calculation.length >= DISPLAY_MAXLENGTH) return;
     display.value = calculation += number;
 }
 
