@@ -13,6 +13,7 @@ function operate(operator, num1, num2) {
     switch (operator) {
         case '+': return add(num1, num2);
         case '-': return subtract(num1, num2);
+        case '*':
         case 'x':
         case 'X': return multiply(num1, num2);
         case '/':
@@ -22,20 +23,46 @@ function operate(operator, num1, num2) {
 
 ///////////////////// Event Handlers ////////////////////////////////////
 function displayContent(e) {
-    const number = e.target.classList.length ? e.target.querySelector('span') : e.target;
+    const number = e.target.classList.length ? e.target.querySelector('span').textContent : e.target.textContent;
 
-    if (/[ca=]/i.test(number.textContent)) return;
-    calculation += number.textContent;
-    display.value = calculation;
+    if (['+', '-', 'x', 'X', '/', '\u00f7'].includes(number) && showFormula(calculation).num.length == 2) displayResult();
+
+    if (/[ca=]/i.test(number) || calculation.length >= DISPLAY_MAXLENGTH) return;
+    display.value = calculation += number;
+}
+
+function displayKeyboardContent(e) {
+    const number = e.key;
+
+    switch(e.key) {
+        case 'Backspace': 
+            clearOneChar();
+            return;
+        case 'Delete':
+            clearDisplay();
+            return;
+        case 'Enter':
+        case '=':
+            displayResult();
+            return;
+    }
+
+    if (/[^0-9.+/*-x]/i.test(e.key) || calculation.length >= DISPLAY_MAXLENGTH) return;
+    display.value = calculation += number;
 }
 
 function displayResult() {
     const formula = showFormula(calculation);
-    display.value = calculation = operate(formula.operator, +formula.num[0], +formula.num[1]);
+
+    if (formula.num.filter(Boolean).length < 2) return;
+
+    let result = operate(formula.operator, +formula.num[0], +formula.num[1]);
+    result = String(result).length > DISPLAY_MAXLENGTH ? result.toPrecision(DISPLAY_MAXLENGTH - 1) : result.toPrecision();
+    display.value = calculation = (result == 'NaN' ? 'error :(' : result);
 }
 
 function clearOneChar() {
-    display.value = calculation = String(calculation).slice(0, -1);
+    display.value = calculation = calculation.slice(0, -1);
 }
 
 function clearDisplay() {
@@ -65,9 +92,11 @@ const clearAll = document.querySelector('.clear-all');
 
 // Other
 let calculation = '';
+const DISPLAY_MAXLENGTH = 15;
 
 // Event Listeners
 keys.addEventListener('click', displayContent);
 answer.addEventListener('click', displayResult);
 clearOne.addEventListener('click', clearOneChar);
 clearAll.addEventListener('click', clearDisplay);
+window.addEventListener('keydown', displayKeyboardContent);
