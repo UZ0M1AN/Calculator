@@ -58,10 +58,11 @@ function displayResult() {
 
     let result = operate(formula.operator, +formula.num[0], +formula.num[1]);
     result = String(result).length > DISPLAY_MAXLENGTH ? result.toPrecision(DISPLAY_MAXLENGTH - 1) : result.toPrecision();
-    display.value = calculation = (result == 'NaN' ? 'error :(' : result);
+    display.value = calculation = (result == 'NaN' ? ERROR_MSG : result);
 }
 
 function clearOneChar() {
+    if (display.value == ERROR_MSG) clearDisplay(); 
     display.value = calculation = calculation.slice(0, -1);
 }
 
@@ -93,6 +94,7 @@ const clearAll = document.querySelector('.clear-all');
 // Other
 let calculation = '';
 const DISPLAY_MAXLENGTH = 15;
+const ERROR_MSG = 'error :(';
 
 // Event Listeners
 keys.addEventListener('click', displayContent);
